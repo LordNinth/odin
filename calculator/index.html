@@ -1,23 +1,47 @@
-<!--Create a simple HTML page with a header, body, and footer. In the body, include a heading, paragraph, and an image.-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE edge" />
     <meta name="viewport" content="width=device-width, initial-scale-1.0" />
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/styles.css" />
     <title>Odin first project</title>
   </head>
   <body>
-    <header>
-      <h1>Calculator</h1>
-    </header>
-    <main>
-      
-      <section>
-        
-      </section>
-    </main>
+    <div class="main">
+      <div class="calculator">
+        <div class="screen">
+          <div class="screen-last">s1</div>
+          <div class="screen-current">0</div>
+        </div>
+
+        <div class="button-grid">
+          <button class="btn btn-blue span-2">Clear</button>
+          <button class="btn btn-red span-2">Delete</button>
+
+          <button class="btn">7</button>
+          <button class="btn">8</button>
+          <button class="btn">9</button>
+          <button class="btn">÷</button>
+
+          <button class="btn">4</button>
+          <button class="btn">5</button>
+          <button class="btn">6</button>
+          <button class="btn">*</button>
+
+          <button class="btn">1</button>
+          <button class="btn">2</button>
+          <button class="btn">3</button>
+          <button class="btn">-</button>
+
+          <button class="btn">.</button>
+          <button class="btn">0</button>
+          <button class="btn">=</button>
+          <button class="btn">+</button>
+        </div>
+      </div>
+    </div>
+
     <script src="calc.js" defer></script>
   </body>
 </html>
