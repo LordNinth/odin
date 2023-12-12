@@ -1,9 +1,11 @@
+//variables to store values
 let firstOperand = "";
 let secondOperand = "";
 let currentOperator = null;
 let currentOperation = null;
 let shouldResetScreen = false;
 
+// variable declaration for dom reference
 const numberButtons = document.querySelectorAll("[data-number]");
 const operatorButtons = document.querySelectorAll("[data-operator]");
 const clearButton = document.getElementById("clearBtn");
@@ -15,14 +17,11 @@ const deleteButton = document.getElementById("deleteBtn");
 const equalButton = document.getElementById("equalBtn");
 const pointButton = document.getElementById("pointBtn");
 
+//adding event listeners
 clearButton.addEventListener("click", clear);
 deleteButton.addEventListener("click", deleteNumber);
 equalButton.addEventListener("click", (e) => appendEqual(e.target.innerText));
 pointButton.addEventListener("click", (e) => appendPoint(e.target.innerText));
-// sevenBtn.addEventListener("click", (e) => {
-//   console.log(e)
-//   currentOperationScreen.textContent = e.target.innerHTML
-// })
 
 numberButtons.forEach((button) =>
   button.addEventListener("click", () => appendNumber(button.textContent))
@@ -110,13 +109,3 @@ function equalOperation(firstOperand,secondOperand,currentOperation){
 
 
 
-// const subtract = (a,b) => {
-//     return a-b ;
-// };
-
-// const multiply = (a,b) => {
-//     return a*b;
-// };
-// const divide = (a,b) =>{
-//     return a/b;
-// };
