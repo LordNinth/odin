@@ -18,7 +18,7 @@ const pointButton = document.getElementById("pointBtn");
 clearButton.addEventListener("click", clear);
 deleteButton.addEventListener("click", deleteNumber);
 equalButton.addEventListener("click", (e) => appendEqual(e.target.innerText));
-// pointButton.addEventListener("click", )
+pointButton.addEventListener("click", (e) => appendPoint(e.target.innerText));
 // sevenBtn.addEventListener("click", (e) => {
 //   console.log(e)
 //   currentOperationScreen.textContent = e.target.innerHTML
@@ -41,9 +41,8 @@ function clear() {
 }
 
 function appendNumber(number) {
-  if (currentOperationScreen.textContent === "0" || shouldResetScreen) {
+  if (currentOperationScreen.textContent === "0" || shouldResetScreen) 
     resetScreen();
-  }
   currentOperationScreen.textContent += number;
 }
 
@@ -75,6 +74,12 @@ function appendEqual(equal) {
   secondOperand = Number(currentOperationScreen.textContent)
   currentOperationScreen.textContent = equalOperation(firstOperand,secondOperand,currentOperation)}
 }
+function appendPoint(point){
+  if (currentOperationScreen.textContent.includes(point)) 
+  return 
+  currentOperationScreen.textContent += point
+}
+
 function deleteNumber() {
   currentOperationScreen.textContent = Math.floor(
     currentOperationScreen.textContent / 10
