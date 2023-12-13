@@ -31,6 +31,7 @@ operatorButtons.forEach((button) =>
   button.addEventListener("click", () => appendOperator(button.textContent))
 );
 
+//functions
 function clear() {
   currentOperationScreen.textContent = "0";
   lastOperationScreen.textContent = "";
@@ -40,7 +41,7 @@ function clear() {
 }
 
 function appendNumber(number) {
-  if (currentOperationScreen.textContent === "0" || shouldResetScreen) 
+  if (currentOperationScreen.textContent === "0" || shouldResetScreen)
     resetScreen();
   currentOperationScreen.textContent += number;
 }
@@ -53,36 +54,49 @@ function appendOperator(operator) {
     lastOperationScreen.textContent = 0 + operator;
     currentOperationScreen.textContent = "";
   } else {
-    lastOperationScreen.textContent = currentOperationScreen.textContent + operator;
+    lastOperationScreen.textContent =
+      currentOperationScreen.textContent + operator;
     currentOperationScreen.textContent = currentOperationScreen.textContent;
-    firstOperand = Number(currentOperationScreen.textContent)
-    currentOperation = operator
-    shouldResetScreen = true
+    firstOperand = Number(currentOperationScreen.textContent);
+    currentOperation = operator;
+    shouldResetScreen = true;
   }
 }
 
 function appendEqual(equal) {
-  if(currentOperationScreen.textContent  === "0" ){
-    lastOperationScreen.textContent = 0 + equal
-
-  } else if (lastOperationScreen.textContent === ""){
-    currentOperationScreen.textContent = currentOperationScreen.textContent + equal
+  if (
+    currentOperationScreen.textContent === "0" ||
+    lastOperationScreen.textContent === ""
+  ) {
+    lastOperationScreen.textContent =
+      currentOperationScreen.textContent + equal;
+    shouldResetScreen = true;
+  } else if (!lastOperationScreen.textContent.includes(equal)){
+    secondOperand = Number(currentOperationScreen.textContent);
+    currentOperationScreen.textContent = equalOperation(
+      firstOperand,
+      secondOperand,
+      currentOperation,
+    );
+    lastOperationScreen.textContent = lastOperationScreen.textContent + secondOperand + equal;
   }
-  
-  else {
-  secondOperand = Number(currentOperationScreen.textContent)
-  currentOperationScreen.textContent = equalOperation(firstOperand,secondOperand,currentOperation)}
 }
-function appendPoint(point){
-  if (currentOperationScreen.textContent.includes(point)) 
-  return 
-  currentOperationScreen.textContent += point
+
+function appendPoint(point) {
+  if (currentOperationScreen.textContent.includes(point)) return;
+  currentOperationScreen.textContent += point;
 }
 
 function deleteNumber() {
-  currentOperationScreen.textContent = Math.floor(
-    currentOperationScreen.textContent / 10
-  );
+  if(currentOperationScreen.textContent === "" || currentOperationScreen.textContent ==="0"){
+    clear();
+  }else{
+  currentOperationScreen.textContent =
+    currentOperationScreen.textContent.substring(
+      (i = 0),
+      currentOperationScreen.textContent.length - 1
+    );
+  }
 }
 
 function resetScreen() {
@@ -90,22 +104,17 @@ function resetScreen() {
   shouldResetScreen = false;
 }
 
-function equalOperation(firstOperand,secondOperand,currentOperation){
-  if (currentOperation === "+"){
+//operation
+function equalOperation(firstOperand, secondOperand, currentOperation) {
+  if (currentOperation === "+") {
     return firstOperand + secondOperand;
-  }
-  else if(currentOperation ==="-"){
+  } else if (currentOperation === "-") {
     return firstOperand - secondOperand;
-  }
-  else if(currentOperation === "*"){
+  } else if (currentOperation === "*") {
     return firstOperand * secondOperand;
-  }
-  else if(currentOperation ==="÷"){
+  } else if (currentOperation === "÷") {
     return firstOperand / secondOperand;
+  } else {
+    return firstOperand, currentOperation, secondOperand;
   }
-  else {return firstOperand,currentOperation, secondOperand}
 }
-
-
-
-
