@@ -33,7 +33,7 @@ operatorButtons.forEach((button) =>
 
 //functions
 function clear() {
-  currentOperationScreen.textContent = "0";
+  currentOperationScreen.textContent = "";
   lastOperationScreen.textContent = "";
   firstOperand = "";
   secondOperand = "";
@@ -48,10 +48,10 @@ function appendNumber(number) {
 
 function appendOperator(operator) {
   if (
-    currentOperationScreen.textContent === "0" ||
+    // currentOperationScreen.textContent === "0" ||
     currentOperationScreen.textContent === ""
   ) {
-    lastOperationScreen.textContent = 0 + operator;
+    lastOperationScreen.textContent =  operator;
     currentOperationScreen.textContent = "";
   } else {
     lastOperationScreen.textContent =
@@ -65,7 +65,7 @@ function appendOperator(operator) {
 
 function appendEqual(equal) {
   if (
-    currentOperationScreen.textContent === "0" ||
+    // currentOperationScreen.textContent === "0" ||
     lastOperationScreen.textContent === ""
   ) {
     lastOperationScreen.textContent =
@@ -107,14 +107,20 @@ function resetScreen() {
 //operation
 function equalOperation(firstOperand, secondOperand, currentOperation) {
   if (currentOperation === "+") {
-    return firstOperand + secondOperand;
+    const sum = firstOperand + secondOperand;
+    const fixedSumDecimal = +sum.toFixed(2)
+    return fixedSumDecimal;
   } else if (currentOperation === "-") {
-    return firstOperand - secondOperand;
+    const sub = firstOperand - secondOperand;
+    const fixedSubDecimal = +sub.toFixed(2)
+    return fixedSubDecimal;
   } else if (currentOperation === "*") {
-    return firstOperand * secondOperand;
+    const multiply = firstOperand * secondOperand;
+    const fixedMultiplyDecimal = +multiply.toFixed(2)
+    return fixedMultiplyDecimal;
   } else if (currentOperation === "÷") {
-    return firstOperand / secondOperand;
-  } else {
-    return firstOperand, currentOperation, secondOperand;
-  }
+    const divideNum = firstOperand / secondOperand
+    const fixedDecimal = +divideNum.toFixed(2)
+    return fixedDecimal;
+  } 
 }
