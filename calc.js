@@ -18,6 +18,7 @@ const equalButton = document.getElementById("equalBtn");
 const pointButton = document.getElementById("pointBtn");
 
 //adding event listeners
+window.addEventListener("keydown", addNumber);
 clearButton.addEventListener("click", clear);
 deleteButton.addEventListener("click", deleteNumber);
 equalButton.addEventListener("click", (e) => appendEqual(e.target.innerText));
@@ -40,6 +41,29 @@ function clear() {
   currentOperation = null;
 }
 
+function addNumber(e) {
+  if (e.keyCode > 95 && e.keyCode < 106) {
+    const addKeyNum = document.querySelector(
+      `[data-number="${e.key}"]`
+    ).textContent;
+    return appendNumber(addKeyNum);
+  } else if (e.keyCode > 105 && e.keyCode < 112 && e.keyCode != 110) {
+    const addKeyOperator = document.querySelector(
+      `[data-operator="${e.key}"]`
+    ).textContent;
+    appendOperator(addKeyOperator);
+  } else if (e.keyCode == "110") {
+    const addKeyPoint = document.getElementById("pointBtn").textContent;
+    console.log(addKeyPoint);
+    return appendPoint(addKeyPoint);
+  } else if (e.keyCode == "13") {
+    const addKeyEqual = document.getElementById("equalBtn").textContent;
+    return appendEqual(addKeyEqual);
+  } else e.keyCode == "8";
+  const addKeyBackSpace = document.getElementById("deleteBtn").textContent;
+  return deleteNumber(addKeyBackSpace);
+}
+
 function appendNumber(number) {
   if (currentOperationScreen.textContent === "0" || shouldResetScreen)
     resetScreen();
@@ -51,7 +75,7 @@ function appendOperator(operator) {
     // currentOperationScreen.textContent === "0" ||
     currentOperationScreen.textContent === ""
   ) {
-    lastOperationScreen.textContent =  operator;
+    lastOperationScreen.textContent = operator;
     currentOperationScreen.textContent = "";
   } else {
     lastOperationScreen.textContent =
@@ -71,14 +95,15 @@ function appendEqual(equal) {
     lastOperationScreen.textContent =
       currentOperationScreen.textContent + equal;
     shouldResetScreen = true;
-  } else if (!lastOperationScreen.textContent.includes(equal)){
+  } else if (!lastOperationScreen.textContent.includes(equal)) {
     secondOperand = Number(currentOperationScreen.textContent);
     currentOperationScreen.textContent = equalOperation(
       firstOperand,
       secondOperand,
-      currentOperation,
+      currentOperation
     );
-    lastOperationScreen.textContent = lastOperationScreen.textContent + secondOperand + equal;
+    lastOperationScreen.textContent =
+      lastOperationScreen.textContent + secondOperand + equal;
   }
 }
 
@@ -88,14 +113,17 @@ function appendPoint(point) {
 }
 
 function deleteNumber() {
-  if(currentOperationScreen.textContent === "" || currentOperationScreen.textContent ==="0"){
+  if (
+    currentOperationScreen.textContent === "" ||
+    currentOperationScreen.textContent === "0"
+  ) {
     clear();
-  }else{
-  currentOperationScreen.textContent =
-    currentOperationScreen.textContent.substring(
-      (i = 0),
-      currentOperationScreen.textContent.length - 1
-    );
+  } else {
+    currentOperationScreen.textContent =
+      currentOperationScreen.textContent.substring(
+        (i = 0),
+        currentOperationScreen.textContent.length - 1
+      );
   }
 }
 
@@ -108,19 +136,19 @@ function resetScreen() {
 function equalOperation(firstOperand, secondOperand, currentOperation) {
   if (currentOperation === "+") {
     const sum = firstOperand + secondOperand;
-    const fixedSumDecimal = +sum.toFixed(2)
+    const fixedSumDecimal = +sum.toFixed(2);
     return fixedSumDecimal;
   } else if (currentOperation === "-") {
     const sub = firstOperand - secondOperand;
-    const fixedSubDecimal = +sub.toFixed(2)
+    const fixedSubDecimal = +sub.toFixed(2);
     return fixedSubDecimal;
   } else if (currentOperation === "*") {
     const multiply = firstOperand * secondOperand;
-    const fixedMultiplyDecimal = +multiply.toFixed(2)
+    const fixedMultiplyDecimal = +multiply.toFixed(2);
     return fixedMultiplyDecimal;
   } else if (currentOperation === "÷") {
-    const divideNum = firstOperand / secondOperand
-    const fixedDecimal = +divideNum.toFixed(2)
+    const divideNum = firstOperand / secondOperand;
+    const fixedDecimal = +divideNum.toFixed(2);
     return fixedDecimal;
-  } 
+  }
 }
