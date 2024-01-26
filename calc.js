@@ -147,8 +147,13 @@ function equalOperation(firstOperand, secondOperand, currentOperation) {
     const fixedMultiplyDecimal = +multiply.toFixed(2);
     return fixedMultiplyDecimal;
   } else if (currentOperation === "÷") {
-    const divideNum = firstOperand / secondOperand;
-    const fixedDecimal = +divideNum.toFixed(2);
-    return fixedDecimal;
+    if (secondOperand === 0) {
+      return 0;
+    } else {
+      const divideNum = firstOperand / secondOperand;
+      const fixedDecimal = +divideNum.toFixed(2);
+      console.log(fixedDecimal);
+      return fixedDecimal;
+    }
   }
 }
