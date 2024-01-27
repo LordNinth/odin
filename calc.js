@@ -40,7 +40,7 @@ function clear() {
   secondOperand = "";
   currentOperation = null;
 }
-
+//keyboard input
 function addNumber(e) {
   if (e.keyCode > 95 && e.keyCode < 106) {
     const addKeyNum = document.querySelector(
