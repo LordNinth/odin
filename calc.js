@@ -54,7 +54,6 @@ function addNumber(e) {
     appendOperator(addKeyOperator);
   } else if (e.keyCode == "110") {
     const addKeyPoint = document.getElementById("pointBtn").textContent;
-    console.log(addKeyPoint);
     return appendPoint(addKeyPoint);
   } else if (e.keyCode == "13") {
     const addKeyEqual = document.getElementById("equalBtn").textContent;
@@ -134,26 +133,29 @@ function resetScreen() {
 
 //operation
 function equalOperation(firstOperand, secondOperand, currentOperation) {
-  if (currentOperation === "+") {
-    const sum = firstOperand + secondOperand;
-    const fixedSumDecimal = +sum.toFixed(2);
-    return fixedSumDecimal;
-  } else if (currentOperation === "-") {
-    const sub = firstOperand - secondOperand;
-    const fixedSubDecimal = +sub.toFixed(2);
-    return fixedSubDecimal;
-  } else if (currentOperation === "*") {
-    const multiply = firstOperand * secondOperand;
-    const fixedMultiplyDecimal = +multiply.toFixed(2);
-    return fixedMultiplyDecimal;
-  } else if (currentOperation === "÷") {
-    if (secondOperand === 0) {
-      return 0;
-    } else {
-      const divideNum = firstOperand / secondOperand;
-      const fixedDecimal = +divideNum.toFixed(2);
-      console.log(fixedDecimal);
-      return fixedDecimal;
-    }
+  switch (currentOperation) {
+    case "+":
+      const sum = firstOperand + secondOperand;
+      const fixedSumDecimal = +sum.toFixed(2);
+      return fixedSumDecimal;
+
+    case "-":
+      const sub = firstOperand - secondOperand;
+      const fixedSubDecimal = +sub.toFixed(2);
+      return fixedSubDecimal;
+
+    case "*":
+      const multiply = firstOperand * secondOperand;
+      const fixedMultiplyDecimal = +multiply.toFixed(2);
+      return fixedMultiplyDecimal;
+
+    case "÷":
+      if (secondOperand === 0) return 0;
+      else {
+        const divideNum = firstOperand / secondOperand;
+        const fixedDecimal = +divideNum.toFixed(2);
+        console.log(fixedDecimal);
+        return fixedDecimal;
+      }
   }
 }
